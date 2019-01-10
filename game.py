@@ -1,7 +1,8 @@
 import pygame
+import random
 
 pygame.init()
-velocidad = [2,2]
+velocidad = [random.randint(0,5),random.randint(0,5)]
 
 screen = pygame.display.set_mode( (800,600) )
 
@@ -19,7 +20,7 @@ while not terminado:
         if event.type == pygame.QUIT:
             terminado = True
             break
-        elif event.type == pygame.KEYDOWN:
+        """elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RIGHT:
                 rect_ball = rect_ball.move([10,0])
             elif event.key == pygame.K_LEFT:
@@ -27,15 +28,26 @@ while not terminado:
             elif event.key == pygame.K_UP:
                 rect_ball = rect_ball.move([0,-10])
             elif event.key == pygame.K_DOWN:
-                rect_ball = rect_ball.move([0,10])
+                rect_ball = rect_ball.move([0,10])"""
     #actualizar los estados del juego
-    """rect_ball = rect_ball.move(velocidad)
-    if rect_ball.y > 536 or rect_ball.y <=0:
-        velocidad[1] = -velocidad[1]
-
-    if rect_ball.x > 736 or rect_ball.x <= 0:
-        velocidad[0] = -velocidad[0]"""
-    #renderizar la interfaz gráfica
+    if velocidad[0] >= 0:
+        velocidad[0] = random.randint(0,5)
+    else:
+        velocidad[0] = random.randint(-5,-1)
+    if velocidad[1] >= 0:
+        velocidad[1] = random.randint(0,5)
+    else:
+        velocidad[1] = random.randint(-5,-1)
+    rect_ball = rect_ball.move(velocidad)
+    if rect_ball.y > 536:
+        velocidad[1] = random.randint(-5,-1)
+    if rect_ball.y <= 0:
+        velocidad[1] = random.randint(0,5)
+    if rect_ball.x > 736:
+        velocidad[0] = random.randint(-5,-1)
+    if rect_ball.x <= 0:
+        velocidad[0] = random.randint(0,5)
+    #renderizar la interfaz grafica
     screen.fill((0,0,0))
     screen.blit(spr_ball, rect_ball)
     pygame.display.flip()
