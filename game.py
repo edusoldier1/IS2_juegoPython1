@@ -1,25 +1,24 @@
-import pygame
+import pygame,sys
 import random
 
 pygame.init()
 velocidad = [random.randint(1,5),random.randint(1,5)]
 
-screen = pygame.display.set_mode( (800,600) )
+screen = pygame.display.set_mode( (600,400) )
 
 #He cargado mi sprite en memoria
 spr_ball = pygame.image.load("assets/soccer.png")
-spr_ball = pygame.transform.scale(spr_ball, (64,64))
+spr_ball = pygame.transform.scale(spr_ball, (128,128))
 rect_ball = spr_ball.get_rect()
 
 
 #Game Loop
-terminado = False
-while not terminado:
+while True:
     #gestionar los eventos del usuario
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            terminado = True
-            break
+            pygame.quit()
+            sys.exit()
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RIGHT:
                 rect_ball = rect_ball.move([10,0])
